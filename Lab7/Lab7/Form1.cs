@@ -15,6 +15,8 @@ namespace Lab7
         double result = 0;
         string operation = "";
         double finalResult;
+        string HistOp="";
+        List<string> Historial = new List<string>();
         public Form1()
         {
             InitializeComponent();
@@ -32,6 +34,7 @@ namespace Lab7
         private void buton1_Click(object sender, EventArgs e)
         {
             textBox1.Text = textBox1.Text + "1";
+
         }
 
         private void button_Click(object sender, EventArgs e)
@@ -42,6 +45,7 @@ namespace Lab7
                 textBox1.Clear();
             }
             textBox1.Text = textBox1.Text + button.Text;
+            HistOp += button.Text;
 
         }
 
@@ -52,6 +56,7 @@ namespace Lab7
             try
             {
                 result = double.Parse(textBox1.Text);
+                HistOp += button.Text;
             }
             catch (System.FormatException ex)
             {
@@ -73,6 +78,7 @@ namespace Lab7
                         result += double.Parse(textBox1.Text);
                         textBox1.Text = result.ToString();
                         finalResult = result;
+
                     }
                     catch
                     {
@@ -129,6 +135,10 @@ namespace Lab7
                     break;
 
             }
+            HistOp += "=";
+            HistOp += result.ToString();
+            Historial.Add(HistOp);
+            HistOp = "";
         }
 
         private void buttonAc_Click(object sender, EventArgs e)
@@ -147,6 +157,58 @@ namespace Lab7
         private void button1_Click(object sender, EventArgs e)
         {
             textBox1.Text = result.ToString();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (panel1.Visible == false)
+            {
+                panel1.Visible = true;
+            }
+            else if(panel1.Visible == true)
+            {
+                panel1.Visible = false;
+            }
+            try
+            {
+                textBox2.Text = Historial[Historial.Count() - 1];
+            }
+            catch
+            {
+                textBox2.Text = "";
+            }
+            try
+            {
+                textBox3.Text = Historial[Historial.Count() - 2];
+            }
+            catch
+            {
+                textBox3.Text = "";
+            }
+            try
+            {
+                textBox4.Text = Historial[Historial.Count() - 3];
+            }
+            catch
+            {
+                textBox4.Text = "";
+            }
+            try
+            {
+                textBox5.Text = Historial[Historial.Count() - 4];
+            }
+            catch
+            {
+                textBox5.Text = "";
+            }
+            try
+            {
+                textBox6.Text = Historial[Historial.Count() - 5];
+            }
+            catch
+            {
+                textBox6.Text = "";
+            }
         }
     }
 }
